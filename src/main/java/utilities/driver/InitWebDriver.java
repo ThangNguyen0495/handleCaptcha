@@ -10,36 +10,34 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.safari.SafariDriver;
 
-import java.util.Objects;
-
-import static utilities.config.WebdriverCapabilities.CONFIG_HEADLESS;
-import static utilities.config.WebdriverCapabilities.CONFIG_NO_HEADLESS;
-
 public class InitWebDriver {
     private WebDriver driver;
 
     public WebDriver getWebDriver(String browser, String isHeadless) {
         if (driver == null) {
-
             switch (browser) {
                 case "firefox" -> {
                     WebDriverManager.firefoxdriver().setup();
                     FirefoxOptions firefoxOptions = new FirefoxOptions();
-                    if (Objects.equals(isHeadless, "false")) {
-                        firefoxOptions.addArguments(CONFIG_NO_HEADLESS);
-                    } else {
-                        firefoxOptions.addArguments(CONFIG_HEADLESS);
+                    if (isHeadless.equals("true")) {
+                        firefoxOptions.addArguments("--headless");
                     }
+                    firefoxOptions.addArguments("--disable-gpu");
+                    firefoxOptions.addArguments("--no-sandbox");
+                    firefoxOptions.addArguments("--disable-dev-shm-usage");
+                    firefoxOptions.addArguments("--allow-insecure-localhost");
                     driver = new FirefoxDriver(firefoxOptions);
                 }
                 case "edge" -> {
                     WebDriverManager.edgedriver().setup();
                     EdgeOptions edgeOptions = new EdgeOptions();
-                    if (Objects.equals(isHeadless, "false")) {
-                        edgeOptions.addArguments(CONFIG_NO_HEADLESS);
-                    } else {
-                        edgeOptions.addArguments(CONFIG_HEADLESS);
+                    if (isHeadless.equals("true")) {
+                        edgeOptions.addArguments("--headless");
                     }
+                    edgeOptions.addArguments("--disable-gpu");
+                    edgeOptions.addArguments("--no-sandbox");
+                    edgeOptions.addArguments("--disable-dev-shm-usage");
+                    edgeOptions.addArguments("--allow-insecure-localhost");
                     driver = new EdgeDriver(edgeOptions);
                 }
                 case "safari" -> {
@@ -49,11 +47,13 @@ public class InitWebDriver {
                 default -> {
                     WebDriverManager.chromedriver().setup();
                     ChromeOptions chromeOptions = new ChromeOptions();
-                    if (Objects.equals(isHeadless, "false")) {
-                        chromeOptions.addArguments(CONFIG_NO_HEADLESS);
-                    } else {
-                        chromeOptions.addArguments(CONFIG_HEADLESS);
+                    if (isHeadless.equals("true")) {
+                        chromeOptions.addArguments("--headless");
                     }
+                    chromeOptions.addArguments("--disable-gpu");
+                    chromeOptions.addArguments("--no-sandbox");
+                    chromeOptions.addArguments("--disable-dev-shm-usage");
+                    chromeOptions.addArguments("--allow-insecure-localhost");
                     driver = new ChromeDriver(chromeOptions);
                 }
             }
