@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Cross Browser Testing Using Selenium" parallel="tests" thread-count="3">
+    <parameter name="isHeadless" value="false"/>
+    <test name="Run test on Chrome">
+        <classes>
+            <class name="Demo">
+                <methods>
+                    <parameter name="browser" value="chrome"/>
+                    <include name="demoTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Run test on FireFox">
+
+        <classes>
+            <class name="Demo">
+                <methods>
+                    <parameter name="browser" value="firefox"/>
+                    <include name="demoTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Run test on Edge">
+        <classes>
+            <class name="Demo">
+                <methods>
+                    <parameter name="browser" value="edge"/>
+                    <include name="demoTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
