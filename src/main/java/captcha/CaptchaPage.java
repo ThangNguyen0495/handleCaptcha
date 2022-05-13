@@ -45,6 +45,7 @@ public class CaptchaPage {
         driver.switchTo().defaultContent();
         sleep(1000);
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(captchaElement.CAPTCHA_CHALLENGE_IFRAME));
+        sleep(5000);
         captchaElement.CAPTCHA_AUDIO.click();
 
         driver.switchTo().defaultContent();
